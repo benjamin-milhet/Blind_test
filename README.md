@@ -3,6 +3,10 @@ Musical blind-test made as a semestrial project at the IUT DIJON
 
 The site uses socket.io to create the player rooms, the blind test list is updated by itself when we put a new folder with a picture and some songs. There is also a level system linked to a database, which is of course also used for player accounts. As you can see when you access the website, it uses cookies.
 
+https://github.com/Paulobergine
+
+https://github.com/Orchanyne
+
 ![Screenshot 2021-10-14 at 17-37-48 Blind-test](https://user-images.githubusercontent.com/56794631/137351331-141c7064-af19-4950-b980-9617e3735ec2.png)
 When you first access the website
 
