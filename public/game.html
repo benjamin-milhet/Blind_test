@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Blind-test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../images/note.png" />
+  <link rel="stylesheet" href="../style/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body style="background-image: url(../images/fond.png);">
+
+  <!--Div qui divise l'écran en 3 pour les joueurs, le chat et le jeu-->
+  <div class="row" id="game" style="margin: 2%;">
+    <div class="col-lg-2" style="margin-bottom: 2%;">
+      <div class="card h-100 mh-100" style="border-color: purple; border-width: thick; border-radius: 10px;">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="color: purple;">Joueurs</h5><hr size="5" style="color: purple;">
+            <div id="usernames" class="overflow-auto" style="max-height: 700px; height: 700px;"></div>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg-6" style="margin-bottom: 2%;" align="center">
+        <div class="card h-100 mh-100" style="border-color: purple; border-width: thick; border-radius: 10px;">
+          <div class="card-body">
+          <div id="chrono"></div>
+            <div style="margin-top: 10px;" id = "resultat-musique">
+              <div class="resultat">
+                <p style="color: purple;" id = resultatMusique></p>
+              </div>
+            </div>
+            <div style="margin-top: 10px;" id = "scores-finals">
+              <div class="score">
+                <p id = scoreView></p>
+              </div>
+            </div>
+            <button type="submit" class="btn text-light" id="play" style="background-color: purple; margin-top: 10px;">Jouer</button>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-4" style="margin-bottom: 2%;">
+        <div class="card h-100 mh-100" style="border-color: purple; border-width: thick; border-radius: 10px;">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="color: purple;">Chat</h5><hr size="5" style="color: purple;">
+            <div class="chat-messages overflow-auto" style="max-height: 600px; height: 600px;"></div>
+          </div>
+          <div class="card-footer">
+            <form id="chat-form">
+              <div class="input-group mb-3" style="margin-top: 2%;">
+                <input type="text" autocomplete="off" id="msg" class="form-control" required>
+                <button type="submit" class="btn text-light" style="background-color: purple;">Envoyer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!--Div qui permet de copier le lien pour inviter des gens-->
+  <div class="input-group mb-3" id="shareDiv" style="width: 60%; margin-left: 20%;">
+    <span class="input-group-text text-light" style="background-color: purple; border-color: purple;">Invite tes amis !</span>
+    <input type="text" id="share" class="form-control" disabled>
+    <button type="button" class="btn text-light" style="background-color: purple;" id="copy">Copier</button>
+  </div>
+
+  <!--Modal qui permet à un joueur non connecté de choisir un pseudo-->
+  <div class="modal" id="userInput" style="display: none;" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dark">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: purple;">Veuillez choisir un pseudo</h5>
+        </div>
+        <div class="modal-body">
+            <form action="">
+              <div class="input-group mb-3">
+                <input type="hidden" name="themes" id="themesUser" value="" />
+                <input type="hidden" name="room" id="roomUser" value="" />
+                <input type="text" name="username" id="username" class="form-control" required>
+                <button type="submit" class="btn text-light" style="background-color: purple;" data-bs-dismiss="modal" aria-label="Close">Valider</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

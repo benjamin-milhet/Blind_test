@@ -1,0 +1,14 @@
+{
+  "name": "BT",
+  "version": "1.0.0",
+  "dependencies": {
+    "easytimer.js": "^4.3.1",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "password-hash": "^1.2.2",
+    "socket.io": "^2.4.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

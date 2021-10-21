@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Blind-test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../images/note.png" />
+  <link rel="stylesheet" href="../style/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body onload="load()" style="background-image: url(../images/fond.png);">
+
+  <!--Navbar-->
+  <nav class="navbar navbar-light bg-dark" id="nav" style="z-index: 1;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="/">Blind-test</a>
+        <div class="btn-group dropstart" id="profil" style="display: none;">
+          <button style="background-color: purple; border-color: purple;" class="btn btn-secondary dropdown-toggle" type="button" id="pseudo" data-bs-toggle="dropdown" aria-expanded="false" value=""></button>
+          <ul class="dropdown-menu" aria-labelledby="pseudo">
+            <li id="level" class="dropdown-item disabled" style="color: purple; text-align: center;"></li>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%; margin: 2%; background-color: purple;"></div>
+            </div>            
+            <li><hr class="dropdown-divider"></li>
+            <li><button type="button" style="background-color: purple; text-align: center; margin: 2%; width: 95%;" class="dropdown-item btn btn-secondary text-light" data-bs-toggle="modal" data-bs-target="#modif" onclick="passwordChange()">Changer le mot de passe</button></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button type="button" style="background-color: purple; text-align: center; margin: 2%;; width: 95%;" class="dropdown-item btn btn-secondary text-light" onclick="disconnect()">Déconnexion</button></li>
+          </ul>
+        </div>
+        <div id="logorsign">
+          <button type="button" style="background-color: purple;" class="btn text-light" data-bs-toggle="modal" data-bs-target="#account" onclick="login()">Connexion</button> 
+          <button type="button" style="background-color: purple;" class="btn text-light" data-bs-toggle="modal" data-bs-target="#account" onclick="signin()">Créer un compte</button>
+        </div>
+    </div>
+  </nav>
+
+  <!--Modal permettant d'accepter les cookies-->
+  <div class="modal" id="cookies" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dark">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: purple;">Ce site utilise les cookies !</h5>
+        </div>
+        <div class="modal-body">
+            <form>
+              <label style="color: purple;" class="form-label">Pour naviguer sur ce site, vous devez accepter l'utilisation de cookies !</label>
+              <label style="color: purple;" class="form-label">Ces cookies servent uniquement à conserver votre session, aucune information confidentielle ne sera utilisée ni demandée.</label> <br /> <br />
+              <button type="button" style="background-color: purple;" data-bs-dismiss="modal" aria-label="Close" class="btn text-light" onclick="modalConnect()">Accepter</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal permettant de modifier son mot de passe-->
+  <div class="modal" id="modif" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dark">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: purple;">Modifier le mot de passe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="modalConnect()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="oldPass" style="color: purple;" class="form-label">Ancien mot de passe</label>
+              <input type="password" class="form-control" id="oldPass" aria-describedby="oldPass">
+            </div>
+            <div class="mb-3">
+              <label for="newPass" style="color: purple;" class="form-label">Nouveau mot de passe</label>
+              <input type="password" class="form-control" id="newPass">
+              <div id="passSecur" class="form-text">Minimum 4 caractères dont 1 chiffre</div>
+            </div>
+            <div class="mb-3">
+              <label for="newPassRepeat" style="color: purple;" class="form-label">Répétez le mot de passe</label>
+              <input type="password" class="form-control" id="newPassRepeat"><br />
+            </div>
+            <button type="button" style="background-color: purple;" class="btn text-light" onclick="changePass()" id="passChange">Valider</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal permettant de se connecter ou de créer un compte-->
+  <div class="modal" id="account" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dark">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: purple;" id="loginModal">Connexion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="modalConnect()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="user" style="color: purple;" class="form-label">Pseudo</label>
+              <input type="username" class="form-control" id="user" aria-describedby="user">
+            </div>
+            <div class="mb-3">
+              <label for="password" style="color: purple;" class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" id="password">
+              <div id="passSecur" style="color: purple;" class="form-text">Minimum 4 caractères dont 1 chiffre</div>
+            </div>
+            <div class="mb-3" id="passwordRepeat">
+              <label for="passwordRepeat" style="color: purple;" class="form-label">Répétez le mot de passe</label>
+              <input type="password" class="form-control" id="retype"><br />
+            </div>
+            <button type="button" style="background-color: purple;" class="btn text-light" onclick="connect()" id="submit">Valider</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Liste des blind-test disponibles-->
+  <div style="margin: 0.5%;" id="list" class="row row-cols-1 row-cols-md-3 g-4"></div>
+
+  <!--Messages d'erreurs-->
+  <span style="position: absolute; bottom: 0; right: 0;" id="info" class="badge bg-danger"></span>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="../js/index.js"></script>
+</body>
+</html>
